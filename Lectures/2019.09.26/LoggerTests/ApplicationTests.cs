@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Cscd371.UnitTestingStuff.Tests
 {
@@ -36,13 +37,13 @@ namespace Cscd371.UnitTestingStuff.Tests
         }
 
         [TestMethod]
-        public void Login_GivenNullPassword_ReturnsFalse()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Login_GivenNullPassword_ThrowsArgumentNullException()
         {
             Application application = new Application();
 #nullable disable
             bool isSuccess = application.Login("inigo", null);
 #nullable restore
-            Assert.IsFalse(isSuccess);
         }
     }
 }

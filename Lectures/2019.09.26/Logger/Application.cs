@@ -6,7 +6,11 @@ namespace Cscd371
     {
         public bool Login(string userName, string password)
         {
-            if (password is null) throw new ArgumentNullException("password");
+            if (password is null)
+            {
+                throw new ArgumentNullException("password");
+            }
+
             return (password.StartsWith("m"));
         }
     }
