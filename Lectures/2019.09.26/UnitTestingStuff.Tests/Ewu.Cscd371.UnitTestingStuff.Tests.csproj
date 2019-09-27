@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Logger\Cscd371.csproj" />
+    <ProjectReference Include="..\UnitTestingStuff\Ewu.Cscd371.UnitTestingStuff.csproj" />
   </ItemGroup>
 
 </Project>

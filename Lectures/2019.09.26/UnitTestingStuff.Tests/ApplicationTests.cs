@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Cscd371.UnitTestingStuff.Tests
+namespace Ewu.Cscd371.UnitTestingStuff.Tests
 {
     [TestClass]
     public class ApplicationTests

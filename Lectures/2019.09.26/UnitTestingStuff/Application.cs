@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cscd371
+namespace Ewu.Cscd371.UnitTestingStuff
 {
     public class Application
     {
