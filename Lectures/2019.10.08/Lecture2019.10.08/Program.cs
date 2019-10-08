@@ -10,7 +10,7 @@ namespace Lecture2019._10._08
             if (GetPerson() is Person person)
             {
                 int len = person.FirstName?.Length ?? 0;
-
+                    
                 string foo = len == 0 ? "empty" : len.ToString();
 
                 Console.WriteLine($"{foo} {len}");
@@ -18,14 +18,7 @@ namespace Lecture2019._10._08
 
             var parsed = double.Parse("0.0");
 
-            var list = new List<int>
-            {
-                42,
-                43,
-                44,
-                45,
-                46
-            };
+            List<int> list = GetFoo();
         }
 
         private static List<int> GetFoo() => null;
