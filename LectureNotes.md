@@ -1,35 +1,16 @@
-- BCL
-- Class
-- Method
-- Constructor
-  - C# classes have implicit default constructors
-- Access modifier
-- Abstract (class/method)
-- Virtual
-  - Java members are virtual by default. C# members are not virtual by default.
-- Override (difference with Java)
-- Primitive
-  - Float and double never throw, NaN and Infinity (Chapter 4)
-  - `Decimal` (Chapter 2)
-  - `String`/Format/Interpolation (Chapter 2)
-  - Parse/TryParse
-  - Reference Type (Chapter 3) / Struct `DateTime`/`ValueTuple` (Chapter 3)
-  - Nullable modifier (C# 8 nullable reference types) (Chapter 2)
-  - Conditional (Ternary/Elvis) operator ?:
-  - Null-Coalescing operator ??
-  - Nameof operator (Chapter 6) 
-  - Null-Conditional operator ?.
-- Field
-  - Readonly field
-- Property
-  - Automatically implemented (auto) property
-  - Readonly property
-- Object initializer
+- [Rubber duck debugging](https://rubberduckdebugging.com/)
+- Member
+- Collection initializer
   - C# has arrays like java. C# also has real multi-dimensional arrays, and array of arrays. (Chapter 3) 
   - See common array mistakes (pg 105)
   - `List<T>`
-- Collection initializer
-- Member
-- Instance/Static member
-- Local variable/function
+- Object initializer
+- [Format strings](https://docs.microsoft.com/en-us/dotnet/standard/base-types/formatting-types)
+- StringBuilder
+- params
 - Extension methods (Chapter 6)
+- Call stack / Locals / Execution pointer / Break Points
+- Exception handling
+- Local function
+- Out variables / scope
+- using static
