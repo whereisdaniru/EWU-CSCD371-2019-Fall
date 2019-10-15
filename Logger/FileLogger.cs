@@ -13,8 +13,9 @@ namespace Logger
 
             if(!File.Exists(filePath))
             {
-                File.Create(filePath);
+                File.Create(filePath).Close();
             }
+
         }
 
         public override void Log(LogLevel logLevel, string message)
