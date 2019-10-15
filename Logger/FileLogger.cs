@@ -21,7 +21,7 @@ namespace Logger
         {
             string logData = $"{DateTime.Now} {className} {logLevel} {message}";
 
-            using (StreamWriter sw = new StreamWriter(filePath))
+            using (StreamWriter sw = File.AppendText(filePath))
             {
                 sw.WriteLine(logData);
             }
