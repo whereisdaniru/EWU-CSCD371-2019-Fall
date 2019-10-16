@@ -5,7 +5,7 @@ we understand polymorphism and pattern matching. Some initial code has already b
 (no, it does not compile, and that is expected).
 
 ### Part 1 - Shopping List (cuz everyone needs more lists)
-- A static class named Printer has a static Print method on that accepts an Item class and a TextWriter
+- A static class named Printer has a static Print method on it that accepts an Item class and a TextWriter
 - There is an existing abstract class named Item which has an abstract method named PrintInfo
 - There is an existing class named Food which inherits from Item
   - Using polymorphism, implement Food so that it will utilize PrintInfo to print the food's
