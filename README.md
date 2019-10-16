@@ -21,6 +21,6 @@ allowed to modify (consider it a third party created class)
 pattern matching to call each of the specific classes that inherit from Actor
    - Now anyone who has seen Big Bang Theory before Raj got cured knows that Raj cannot speak when
 women are around, so make sure that he only says something when WomenArePresent is false. If
-WomenArePresent happens to be true, he can only "mumble"
+WomenArePresent happens to be true, he can only "mumble" (logic should be expressed in the switch statement, not the method that takes care of what he says - meaning, there should be 2 methods that exist for Raj)
 
 ### Extra Credit (TBD)
