@@ -13,6 +13,14 @@ namespace Inheritance
             {
                 Printer.Print(new Food { Brand = "Frosted Mini Wheats", Upc = "123456789" }, sw);
                 sw.Flush();
+
+                Printer.Print(new Television { Manufacturer = "Samsung", Size = "42 inches"}, sw);
+                sw.Flush();
+
+                
+
+
+
             }
         }
     }
