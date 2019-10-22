@@ -8,31 +8,34 @@ namespace Inheritance
     {
         public static String Speak(this Actor actor)
         {
+
             string line = "";
 
-            if(actor is Penny)
+            if (actor is null)
             {
-                Penny penny = (Penny) actor;
-                line = penny.getSpeak();
+                throw new ArgumentNullException("Actor unknown");
             }
-            if(actor is Sheldon)
+            else
             {
-                Sheldon sheldon = (Sheldon) actor;
-                line = sheldon.getSpeak();
-            }
-            if(actor is Raj)
-            {
-                Raj raj = (Raj) actor;
-                if(raj.womenArePresent == true)
+                switch (actor)
                 {
-                    line = raj.getSpeakWomen();
-                }
-                else if(raj.womenArePresent == false)
-                {
-                    line = raj.getSpeakNoWomen();
-                }
-            }
+                    case Penny penny:
+                        line = penny.getSpeak();
+                        break;
 
+                    case Sheldon sheldon:
+                        line = sheldon.getSpeak();
+                        break;
+
+                    case Raj raj when raj.womenArePresent == true:
+                        line = raj.getSpeakWomen();
+                        break;
+
+                    case Raj raj when raj.womenArePresent == false:
+                        line = raj.getSpeakNoWomen();
+                        break;
+                }
+            }
             return line;
         }
     }

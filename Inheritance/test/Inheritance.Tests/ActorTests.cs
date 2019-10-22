@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Inheritance.Tests
 {
@@ -62,6 +63,19 @@ namespace Inheritance.Tests
 
             //Assert
             Assert.AreEqual("I haven't cried this hard since Toy Story 3.", line);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullActor_NullArgument()
+        {
+            //Arrange
+            
+            //Act
+            string line = ActorExtension.Speak(null);
+
+            //Assert
+            
         }
 
     }
