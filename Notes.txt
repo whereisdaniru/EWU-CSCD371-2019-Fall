@@ -1,0 +1,15 @@
+
+Logger: 
+  FileLogger
+  DatabaseLogger
+  
+ 
+LoggerTests
+  Verifies behavior of File and database Logger
+
+SampleApp
+  Users ILogger and/or BaseLogger
+  
+SampleApp.Tests
+  MockLogger
+  Tests to verify behavior in the SampleApp regarding logging.
