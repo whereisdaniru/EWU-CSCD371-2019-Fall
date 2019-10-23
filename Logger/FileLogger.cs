@@ -14,7 +14,7 @@ namespace Logger
 
         public override void Log(LogLevel logLevel, string message)
         {
-            File.AppendAllText(FilePath, $"{DateTime.Now:G} {ClassName} {logLevel}: {message}{Environment.NewLine}");
+            File.AppendAllText(FilePath, FormatLogEntry(logLevel, message));
         }
     }
 }

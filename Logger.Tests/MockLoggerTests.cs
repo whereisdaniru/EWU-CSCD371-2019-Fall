@@ -7,6 +7,12 @@ namespace Logger.Tests
     [TestClass]
     public class MockLoggerTests
     {
+        public void Messages_NoData_DoesNotReturnNull()
+        {
+            MockLogger mockLogger = new MockLogger(nameof(MockLoggerTests));
+            Assert.IsNotNull(mockLogger.Messages);
+
+        }
         [TestMethod]
         public void Log_WithData_WritesFile()
         {
@@ -17,49 +23,49 @@ namespace Logger.Tests
             sut.Log(LogLevel.Warning, "Test");
 
             // Assert
-            string[] lines = sut.Messages();
+            string[] lines = sut.Messages;
 
-            foreach(string line in lines )
-            {
-                ///do something
-            }
-
-            //Assert.AreEqual(1, lines.Length);
-            //Assert.IsTrue(lines[0].Contains($"{LogLevel.Warning}"));
-            //Assert.IsTrue(lines[0].Contains(nameof(FileLoggerTests)));
-            //Assert.IsTrue(lines[0].Contains("Test"));
+            Assert.AreEqual(1, lines.Length);
+            Assert.IsTrue(lines[0].Contains($"{LogLevel.Warning}"));
+            Assert.IsTrue(lines[0].Contains(nameof(MockLoggerTests)));
+            Assert.IsTrue(lines[0].Contains("Test"));
         }
 
         [TestMethod]
         public void Log_WithData_AppendsDataToFile()
         {
             // Arrange
-            string filePath = Path.GetFullPath(Path.GetRandomFileName());
-            var sut = new FileLogger(filePath) { ClassName = nameof(FileLoggerTests) };
+            MockLogger mockLogger = new MockLogger(nameof(MockLoggerTests));
 
             // Act
-            sut.Log(LogLevel.Warning, "Test");
-            sut.Log(LogLevel.Error, "Test2");
+            mockLogger.Log(LogLevel.Warning, "Test");
+            mockLogger.Log(LogLevel.Error, "Test2");
 
             // Assert
-            string[] lines = File.ReadAllLines(filePath);
-            File.Delete(filePath);
-            Assert.AreEqual(2, lines.Length);
-            Assert.IsTrue(lines[0].Contains($"{LogLevel.Warning}"));
-            Assert.IsTrue(lines[0].Contains("Test"));
-            Assert.IsTrue(lines[0].Contains(nameof(FileLoggerTests)));
-            Assert.IsTrue(lines[1].Contains($"{LogLevel.Error}"));
-            Assert.IsTrue(lines[1].Contains(nameof(FileLoggerTests)));
-            Assert.IsTrue(lines[1].Contains("Test2"));
+            string[] logRecords = mockLogger.Messages;
+            Assert.AreEqual(2, logRecords.Length);
+            Assert.IsTrue(logRecords[0].Contains($"{LogLevel.Warning}"));
+            Assert.IsTrue(logRecords[0].Contains("Test"));
+            Assert.IsTrue(logRecords[0].Contains(nameof(MockLoggerTests)));
+            Assert.IsTrue(logRecords[1].Contains($"{LogLevel.Error}"));
+            Assert.IsTrue(logRecords[1].Contains(nameof(MockLoggerTests)));
+            Assert.IsTrue(logRecords[1].Contains("Test2"));
         }
 
         [TestMethod]
         [DataRow(LogLevel.Debug, "This is a test of the emergency broadcast system.")]
         [DataRow(LogLevel.Error, "Hello my name is Inigo Montoya.")]
-        public void Log_WithDataMoreDate_AppendsDataToFile(LogLevel level, string message)
+        public void Log_WithLogSampleData_AppendsToMessages(LogLevel level, string message)
         {
+            MockLogger mockLogger = new MockLogger(nameof(MockLoggerTests));
 
+            mockLogger.Log(level, message);
 
+            string[] logRecords = mockLogger.Messages;
+             
+            Assert.IsTrue(logRecords[0].Contains($"{level}"));
+            Assert.IsTrue(logRecords[0].Contains(message));
+            Assert.IsTrue(logRecords[0].Contains(nameof(MockLoggerTests)));
         }
     }
 }

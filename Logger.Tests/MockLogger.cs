@@ -12,12 +12,17 @@ namespace Logger
         
         public override void Log(LogLevel logLevel, string message)
         {
-            
+            InternalMessages.Add(FormatLogEntry(logLevel, message));
         }
 
-        public  string[] Messages()
+        System.Collections.Generic.List<string> InternalMessages { get; } = 
+            new System.Collections.Generic.List<string>();
+        public string[] Messages
         {
-            return null;
+            get
+            {
+                return System.Linq.Enumerable.ToArray(InternalMessages);
+            }
         }
     }
 }

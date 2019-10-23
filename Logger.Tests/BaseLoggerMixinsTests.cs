@@ -14,7 +14,7 @@ namespace Logger.Tests
             // Arrange
 
             // Act
-            BaseLoggerMixins.Error(null, "");
+            BaseLoggerMixins.Error(null!, "");
 
             // Assert
         }
@@ -41,7 +41,7 @@ namespace Logger.Tests
             // Arrange
 
             // Act
-            BaseLoggerMixins.Warning(null, "");
+            BaseLoggerMixins.Warning(null!, "");
 
             // Assert
         }
@@ -68,7 +68,7 @@ namespace Logger.Tests
             // Arrange
 
             // Act
-            BaseLoggerMixins.Info(null, "");
+            BaseLoggerMixins.Info(null!, "");
 
             // Assert
         }
@@ -95,7 +95,7 @@ namespace Logger.Tests
             // Arrange
 
             // Act
-            BaseLoggerMixins.Debug(null, "");
+            BaseLoggerMixins.Debug(null!, "");
 
             // Assert
         }
