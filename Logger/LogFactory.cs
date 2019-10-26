@@ -9,7 +9,7 @@
             LogFile = logFile;
         }
 
-        public BaseLogger CreateLogger(string className)
+        public ILogger CreateLogger(string className)
         {
             if (!string.IsNullOrWhiteSpace(LogFile))
             {
@@ -19,7 +19,7 @@
                 };
             }
 
-            return null;
+            throw new System.InvalidOperationException("Log file name not specified.");
         }
     }
 }

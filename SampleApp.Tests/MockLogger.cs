@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Logger;
+using System;
 
-namespace Logger
+namespace SampleApp.Tests
 {
     public class MockLogger :BaseLogger
     {

@@ -1,8 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Logger;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 
-namespace Logger.Tests
+namespace SampleApp.Tests
 {
     [TestClass]
     public class MockLoggerTests

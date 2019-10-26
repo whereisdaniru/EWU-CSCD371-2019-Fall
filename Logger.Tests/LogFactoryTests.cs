@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 
 namespace Logger.Tests
@@ -6,14 +7,14 @@ namespace Logger.Tests
     [TestClass]
     public class LogFactoryTests
     {
-        [TestMethod]
+        [TestMethod][ExpectedException(typeof(InvalidOperationException))]
         public void CreateLogger_WithNoLoggerConfigured_ItReturnsNull()
         {
             // Arrange
             var sut = new LogFactory();
 
             // Act
-            BaseLogger logger = sut.CreateLogger(nameof(LogFactoryTests));
+            ILogger logger = sut.CreateLogger(nameof(LogFactoryTests));
 
             // Assert
             Assert.IsNull(logger);
@@ -28,7 +29,7 @@ namespace Logger.Tests
             sut.ConfigureFileLogger(filePath);
 
             // Act
-            BaseLogger logger = sut.CreateLogger(nameof(LogFactoryTests));
+            ILogger logger = sut.CreateLogger(nameof(LogFactoryTests));
 
             // Assert
             Assert.IsTrue(logger is FileLogger);

@@ -2,7 +2,7 @@
 
 namespace Logger
 {
-    public abstract class BaseLogger
+    public abstract class BaseLogger : ILogger
     {
         public string? ClassName { get; set; }
 
