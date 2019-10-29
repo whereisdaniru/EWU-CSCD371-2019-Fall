@@ -6,36 +6,50 @@ namespace Lecture1029
 {
     class Program
     {
+        private readonly object _Foo;
+
+        public Program()
+        {
+            _Foo = new object();
+        }
+
         static void Main(string[] args)
         {
-            if (args is null)
-            {
-                throw new ArgumentException(nameof(args), "My message here");
-            }
+            (int, int) numbers = (1, 2);
+            Print(numbers); // (1, 2)
+            AddNumbers(numbers);
+            Print(numbers); // (1, 2)? (3, 2)?
 
+            Pets pet = default;
 
-            try
-            {
-                // lots of IO stuff here
-                Console.WriteLine("Hello World!");
-            }
-            catch (IOException ex) when (ex.Message == "foo")
-            {
-                //Do something
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine($"{e}");
-                throw;
-            }
+            pet = Pets.Dog;
+
+            Print(pet);
         }
+
+        public static void AddNumbers((int a, int b) numbers)
+        {
+            //a += b;
+            //numbers.Item1 += numbers.Item2;
+
+             
+        }
+
+        public static void Print(object foo) => Console.WriteLine(foo.ToString());
     }
 
-    public class MyException : Exception
-    {
-        public MyException(string message) : base(message)
-        {
 
-        }
+    [Flags]
+    public enum Pets
+    {
+        Unknown = 0,
+        None = Unknown,
+
+        FlyDog = Dog | Chicken,
+
+        Dog = 0b_0000,
+        Cat = 0b_0001,
+        Bird = 0b_0010,
+        Chicken = 0b_0100
     }
 }
