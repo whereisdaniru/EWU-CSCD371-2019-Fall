@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 
 namespace Lecture1029
 {
@@ -9,6 +10,13 @@ namespace Lecture1029
     {
         static void Main(string[] args)
         {
+            Stream fileStream = File.Open("Foo", FileMode.OpenOrCreate);
+            var reader = new StreamReader(fileStream);
+            using var writer = new StreamWriter(fileStream, leaveOpen:true);
+            fileStream.Dispose();
+            
+            reader.Dispose();
+
             var hashSet = new HashSet<Person>();
             //var d = new Dictionary<int, string>();
             //d.Add(0, "");
