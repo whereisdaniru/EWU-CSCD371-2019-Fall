@@ -12,9 +12,20 @@ namespace Lecture1029
         {
             Stream fileStream = File.Open("Foo", FileMode.OpenOrCreate);
             var reader = new StreamReader(fileStream);
-            using var writer = new StreamWriter(fileStream, leaveOpen:true);
+            using var writer = new StreamWriter(fileStream, leaveOpen: true);
+
+            StreamWriter writer2 = null;
+            try
+            {
+                writer2 = new StreamWriter(fileStream, leaveOpen: true);
+            }
+            finally
+            {
+                writer2?.Dispose();
+            }
+
             fileStream.Dispose();
-            
+
             reader.Dispose();
 
             var hashSet = new HashSet<Person>();
@@ -40,6 +51,49 @@ namespace Lecture1029
         }
 
         public static void Print(object foo) => Console.WriteLine(foo.ToString());
+    }
+
+    public class Garbage : IDisposable
+    {
+        private IDisposable DisposableMember { get; }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                    DisposableMember?.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        ~Garbage()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(false);
+        }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            GC.SuppressFinalize(this);
+        }
+        #endregion
+
     }
 
     [DebuggerDisplay("{Name} {Dob}")]
@@ -82,7 +136,7 @@ namespace Lecture1029
             //return rv;
             //return Name.GetHashCode() + Dob.GetHashCode() + (Ssn?.GetHashCode() ?? 0);
         }
-        
+
         public static bool operator ==(Person a, Person b)
         {
             if (ReferenceEquals(a, b)) return true;
