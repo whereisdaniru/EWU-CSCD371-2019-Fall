@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -10,44 +11,32 @@ namespace Lecture1029
     {
         static void Main(string[] args)
         {
-            Stream fileStream = File.Open("Foo", FileMode.OpenOrCreate);
-            var reader = new StreamReader(fileStream);
-            using var writer = new StreamWriter(fileStream, leaveOpen: true);
-
-            StreamWriter writer2 = null;
-            try
-            {
-                writer2 = new StreamWriter(fileStream, leaveOpen: true);
-            }
-            finally
-            {
-                writer2?.Dispose();
-            }
-
-            fileStream.Dispose();
-
-            reader.Dispose();
-
-            var hashSet = new HashSet<Person>();
-            //var d = new Dictionary<int, string>();
-            //d.Add(0, "");
-            //d.Add(0, "Foo");
-            //d[0] = "Foo";
-
             var kevin1 = new Person("Kevin", DateTime.Today.AddDays(-1), ssn: "123456");
-            var kevin2 = new Person("Kevin", DateTime.Today.AddDays(-1), ssn: "123456");
-            var kevin3 = new Person("Kevin", DateTime.Today.AddDays(-1), ssn: "123456");
+            var kevin2 = new Person("Joe", DateTime.Today.AddDays(-2), ssn: "456789");
+            var kevin3 = new Person("Kenny", DateTime.Today.AddDays(-1), ssn: "98756");
 
-            DateTime tomrrow = DateTime.Now + TimeSpan.FromDays(1);
-            kevin1 = null;
-            //Console.WriteLine($"Equals {kevin1.Equals(kevin2)}");
-            Console.WriteLine($"== {kevin1 == kevin2}");
+            var coolPeople = new[] { kevin1, kevin2, kevin3 };
 
-            hashSet.Add(kevin1);
-            hashSet.Add(kevin2);
-            hashSet.Add(kevin3);
-            Console.WriteLine(hashSet.Count);
-            //Print(kevin);
+            string jsonData = JsonConvert.SerializeObject(coolPeople);
+            
+            
+            using var ms = new MemoryStream();
+            using var writer = new StreamWriter(ms, leaveOpen:true);
+            writer.WriteLine(jsonData);
+            writer.Flush();
+
+            ms.Position = 0;
+
+            List<Person> people = LoadPeople(ms);
+        }
+
+        private static List<Person> LoadPeople(Stream stream)
+        {
+            using var reader = new StreamReader(stream, leaveOpen:true);
+            string jsonData = reader.ReadToEnd();
+
+            List<Person> people = JsonConvert.DeserializeObject<List<Person>>(jsonData);
+            return people;
         }
 
         public static void Print(object foo) => Console.WriteLine(foo.ToString());
@@ -105,9 +94,9 @@ namespace Lecture1029
 
         private string Ssn { get; }
 
-        public Person(string name, DateTime dob, string ssn = null)
+        public Person(string name, DateTime dateOfBirth, string ssn = null)
         {
-            Dob = dob;
+            Dob = dateOfBirth;
             Ssn = ssn;
             Name = name ?? throw new ArgumentNullException(nameof(name));
         }
