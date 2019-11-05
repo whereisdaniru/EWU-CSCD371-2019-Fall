@@ -15,7 +15,12 @@
 
         public override string ToString()
         {
-            return $"{Size} {Location} {Owner}";
+
+            if(Size ==Size.Default)
+            {
+                return "";
+            }
+            return $"Owner: {Owner.ToString()} Location: {Location.ToString()} Size: {Size}";
         }
 
     }

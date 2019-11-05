@@ -10,7 +10,11 @@ namespace Mailbox
         Small = 1,
         Medium = 2,
         Large = 4,
-        Premium = 16
+        Premium = 16,
+
+        SmallPremium = Small + Premium,
+        MediumPremium = Medium + Premium,
+        LargePremium = Large + Premium
 
     }
 

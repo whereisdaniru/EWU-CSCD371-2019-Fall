@@ -14,16 +14,38 @@ namespace Mailbox
             LastName = lastName;
         }
 
-        public bool Equals(Person other)
+        public bool Equals([AllowNull]Person other)
         {
-            if(LastName == other.LastName)
+            if(LastName == other.LastName && FirstName == other.FirstName)
             {
-                if(FirstName == other.FirstName)
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is null)
+            {
+                return false;
+            }
+            return Equals((Person)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (FirstName, LastName).GetHashCode();
+            
+        }
+
+        public static bool operator ==(Person a, Person b)
+        {
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(Person a, Person b)
+        {
+            return !a.Equals(b);
         }
 
         public override string ToString()

@@ -69,7 +69,9 @@ namespace Mailbox
                     case 4:
                         Console.WriteLine("Enter box number as x,y");
                         string boxNumber = Console.ReadLine();
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                         string[] parts = boxNumber?.Split(',');
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
                         if (parts?.Length == 2 &&
                             int.TryParse(parts[0], out int x) &&
                             int.TryParse(parts[1], out int y))
@@ -89,17 +91,41 @@ namespace Mailbox
 
         public static string GetOwnersDisplay(Mailboxes mailboxes)
         {
-            
+            string owners = "";
+            foreach(Mailbox mailbox in mailboxes)
+            {
+                owners += mailbox.Owner.ToString() + ", ";
+            }
+            return owners;
         }
 
-        public static string GetMailboxDetails(Mailboxes mailboxes, int x, int y)
+        public static string? GetMailboxDetails(Mailboxes mailboxes, int x, int y)
         {
-            
+            foreach(Mailbox mailbox in mailboxes)
+            {
+                if(mailbox.Location == (x,y))
+                {
+                    return mailbox.ToString();
+                }
+            }
+            return null;
         }
 
-        public static Mailbox AddNewMailbox(Mailboxes mailboxes, string firstName, string lastName, Size size)
+        public static Mailbox? AddNewMailbox(Mailboxes mailboxes, string firstName, string lastName, Size size)
         {
-            
+            Person owner = new Person(firstName, lastName);
+            for(int i = 0; i < mailboxes.Width; i++)
+            {
+                for(int j = 0; j<mailboxes.Height; j++)
+                {
+                    bool isTaken = mailboxes.GetAdjacentPeople(i, j, out HashSet<Person> adjacentPeople);
+                    if(!isTaken && !adjacentPeople.Contains(owner))
+                    {
+                        return new Mailbox(size, (i, j), owner);
+                    }
+                }
+            }
+            return null;
         }
     }
 }
