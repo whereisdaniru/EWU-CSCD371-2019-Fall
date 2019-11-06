@@ -10,7 +10,8 @@ The purpose of this assignment is to write a class library with a generic collec
 
 ## Reading
 
-Read through Chapters 12 & 13
+Read through Chapters 12 & 13.
+(This would be far more valuable than listening to the lecture from 2019-11-05.)
 
 ## Instructions
 
@@ -18,7 +19,7 @@ Read through Chapters 12 & 13
   - Supports collecting a fixed number of items once instantiated
   - Has a constructor via which you can specify fixed width.  (Other constructors are welcome.)
   - Handle null appropriately when items are missing (this is likely a judgement call so justify your answer in the comments.)
-  - Throw an exception if an item doesn't exci
+  - Throw an exception if an item doesn't exist.
   - Include an index operator
   - Support using foreach over the items in the `Array<T>` class.
   - Support a collection initializer
