@@ -11,6 +11,8 @@ namespace Mailbox
 
         public DataLoader(Stream source)
         {
+            if (source == null)
+                throw new ArgumentNullException();
             Source = source;
         }
 
@@ -21,7 +23,7 @@ namespace Mailbox
 
             try
             {
-                using (var reader = new StreamReader(Source, leaveOpen: true))
+                using (StreamReader reader = new StreamReader(Source, leaveOpen: true))
                 {
                     string? line;
                     while ((line = reader.ReadLine()) != null)
@@ -29,21 +31,20 @@ namespace Mailbox
                         Mailbox mailbox = JsonConvert.DeserializeObject<Mailbox>(line);
                         mailboxes.Add(mailbox);
                     }
-                    return mailboxes;
                 }
             }
             catch (JsonReaderException)
             {
                 return null;
             }
-           
+            return mailboxes;
+
         }
 
         public void Save(List<Mailbox> mailboxes)
         {
 
             Source.Position = 0;
-
             using (StreamWriter writer = new StreamWriter(Source, leaveOpen: true))
             {
                 foreach(Mailbox mailbox in mailboxes)

@@ -10,6 +10,11 @@ namespace Mailbox
 
         public Person(String firstName, String lastName)
         {
+            if(firstName is null || lastName is null)
+            {
+                throw new ArgumentNullException();
+            }
+            
             FirstName = firstName;
             LastName = lastName;
         }

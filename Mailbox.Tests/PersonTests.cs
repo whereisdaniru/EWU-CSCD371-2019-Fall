@@ -6,9 +6,8 @@ using System.Text;
 namespace Mailbox.Tests
 {
     [TestClass]
-    class PersonTests
+    public class PersonTests
     {
-
 
         [TestMethod]
         public void ReturnsPerson_ToString()

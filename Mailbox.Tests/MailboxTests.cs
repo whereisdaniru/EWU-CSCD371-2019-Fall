@@ -7,7 +7,7 @@ using System.Text;
 namespace Mailbox.Tests
 {
     [TestClass]
-    class MailboxTests
+    public class MailboxTests
     {
         [TestMethod]
         public void MailboxReturnsMailbox_ToString()
