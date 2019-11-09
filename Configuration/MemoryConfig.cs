@@ -8,29 +8,38 @@ namespace Configuration
         Dictionary<string, object?> InternalCollection { get; } =
             new Dictionary<string, object?>();
 
-        Dictionary<Type, System.Collections.IDictionary> InternalValueTypeCollection =
+        Dictionary<Type, System.Collections.IDictionary> InternalValueTypeCollection { get; } =
             new Dictionary<Type, System.Collections.IDictionary>();
 
         public void SetValue<TValue>(string name, TValue value)
+            // where TValue: IComparable<TValue>
         {
             if(typeof(TValue).IsValueType)
             {
-                System.Collections.IDictionary collection;
-                if (InternalValueTypeCollection.TryGetValue(typeof(TValue), 
-                    out collection))
-                {
-                    ((IDictionary<string, TValue>)collection)[name] = value;
-                }
-                else
-                {
-                    collection = new Dictionary<string, TValue>();
-                    collection.Add(name, value);
-                    InternalValueTypeCollection.Add(typeof(TValue), collection);
-                }
+                SetValueTypeConfig<TValue>(name, value);
             }
             else
             {
                 InternalCollection[name] = value;
+            }
+        }
+
+        private void SetValueTypeConfig<TValue>(string name, TValue value)
+            // Does not work because we don't know at the caller whethe the type is a stuct or not.
+            // where TValue: struct  
+        {
+            if (InternalValueTypeCollection.TryGetValue(typeof(TValue),
+                out System.Collections.IDictionary collection))
+            {
+                ((IDictionary<string, TValue>)collection)[name] = value;
+            }
+            else
+            {
+                collection = new Dictionary<string, TValue>
+                    {
+                        { name, value }
+                    };
+                InternalValueTypeCollection.Add(typeof(TValue), collection);
             }
         }
 
@@ -42,7 +51,6 @@ namespace Configuration
             }
             else
             {
-                // Discuss use of null forgive operator.
                 return (TValue)InternalCollection[name]!;
             }
         }
