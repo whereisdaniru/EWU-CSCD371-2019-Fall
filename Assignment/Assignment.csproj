@@ -2,11 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <NoWarn>CA1065</NoWarn>
+    <NoWarn>1701; AD0001</NoWarn>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Assignment.Interfaces\Assignment.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="People.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IntelliTect.Analyzers" Version="0.1.3" />
   </ItemGroup>
 
 </Project>

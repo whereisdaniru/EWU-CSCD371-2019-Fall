@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace Assignment
 {
@@ -10,5 +11,7 @@ namespace Assignment
         public IAddress Address { get;set; }
 
         public string EmailAddress { get; set; }
+
+       
     }
 }
