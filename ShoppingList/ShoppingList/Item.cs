@@ -10,7 +10,9 @@ namespace ShoppingList
 
         public Item(string itemName)
         {
-            ItemName = itemName ?? throw new ArgumentNullException(nameof(ItemName));
+            if (itemName is null) throw new ArgumentNullException(nameof(ItemName));
+
+            ItemName = itemName;
         }
 
         public override string ToString()

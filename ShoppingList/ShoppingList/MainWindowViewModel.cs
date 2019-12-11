@@ -12,7 +12,7 @@ namespace ShoppingList
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private void SetProperty<T>(ref T field, T value,
-            [CallerMemberName]string propertyName = null)
+            [CallerMemberName]string propertyName = null!)
         {
             if (!EqualityComparer<T>.Default.Equals(field, value))
             {
@@ -27,7 +27,7 @@ namespace ShoppingList
         public string Item
         {
             get => _Item;
-            set => SetProperty(ref _Item, value, nameof(Item));
+            set => SetProperty(ref _Item, value);
         }
 
         private Item _SelectedItem;
@@ -57,9 +57,12 @@ namespace ShoppingList
 
         private void OnAddItem()
         {
-            ShoppingList.Add(new Item(Item));
-            CanExecute = true;
-            AddItemCommand.InvokeCanExecuteChanged();
+            if (!string.IsNullOrWhiteSpace(Item))
+            {
+                ShoppingList.Add(new Item(Item));
+                CanExecute = true;
+                AddItemCommand.InvokeCanExecuteChanged();
+            }
         }
 
         private void OnRemoveItem()
@@ -75,7 +78,8 @@ namespace ShoppingList
 
         private void OnChangeItem()
         {
-            Item = SelectedItem.ToString();
+            Item = SelectedItem.ItemName;
+            
         }
 
 
