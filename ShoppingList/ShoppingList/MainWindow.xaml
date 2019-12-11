@@ -16,7 +16,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400*" />
             <ColumnDefinition Width="400*" />
-            
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -34,7 +34,7 @@
         <StackPanel Grid.Column="0" Grid.Row="4">
             <ToggleButton Height="auto" FontSize="20" Content="Remove Selected Item From List" Command="{Binding RemoveItemCommand}" />
         </StackPanel>
-  
+
         <TextBlock Grid.Column="1" Grid.Row="1" FontSize="20" FontWeight="Heavy" FontStyle="Oblique" TextAlignment="Center" Background="PaleGoldenrod" Width="300">
             Shopping List
         </TextBlock>
@@ -52,7 +52,7 @@
 
         <StackPanel Grid.Column="1" Grid.Row="3">
             <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" FontSize="20" Text="{Binding Item}" />
-                
+
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2">
